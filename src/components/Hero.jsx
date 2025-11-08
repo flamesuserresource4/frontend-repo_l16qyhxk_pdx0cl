@@ -13,6 +13,9 @@ export default function Hero() {
             <Spline scene="https://prod.spline.design/41MGRk-UDPKO-l6W/scene.splinecode" style={{ width: '100%', height: '100%' }} />
           </div>
           <div className="space-y-3">
+            <p className="text-sm md:text-base text-black/80 max-w-3xl mx-auto leading-relaxed">
+              “Transform Your Dental Practice Into A Fully Automated, Always-On Growth Engine.”
+            </p>
             <a
               href="#book"
               className="inline-block px-6 py-3 border border-black rounded-md hover:opacity-70 transition-opacity"

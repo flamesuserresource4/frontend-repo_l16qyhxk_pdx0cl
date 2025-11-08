@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Calendar, Shield, RefreshCw, Headphones } from 'lucide-react';
 
 const SectionTitle = ({ children }) => (
   <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-8">{children}</h2>
@@ -45,16 +46,13 @@ export function AboutSection() {
     <section id="about" className="bg-white">
       <div className="mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
         <SectionTitle>About</SectionTitle>
-        <div className="max-w-3xl space-y-4 text-black/90 leading-relaxed">
+        <div className="max-w-3xl space-y-5 text-black/90 leading-relaxed">
           <p>
-            Velodent delivers enterprise-grade automation for dental organizations that value precision,
-            reliability, and measurable outcomes. Our platform integrates scheduling, intake, insurance
-            verification, recall, and analytics—quietly improving every patient touchpoint.
+            Velodent is built for modern dental operators who demand precision, scalability, compliance, and performance.
           </p>
           <p>
-            We engineer systems that reduce chair time waste, stabilize front desk load, and surface
-            the right insights at the right moment. No noise. No gimmicks. Just clean, dependable
-            infrastructure for modern clinics.
+            We don’t replace your team. We multiply them.
+            Our AI strengthens every human at your front desk — delivering faster scheduling, faster verification, faster recall, and faster conversions — without burnout, without chaos, without wasted payroll.
           </p>
         </div>
       </div>
@@ -71,6 +69,7 @@ export function ServicesSection() {
       details:
         'Our AI models optimize chair utilization by predicting cancellations, proposing optimal time blocks, and auto-filling with waitlisted patients. Integrates with leading PMS systems.',
       video: 'https://www.youtube.com/embed/C0DPdy98e4c',
+      icon: Calendar,
     },
     {
       title: 'Insurance + Eligibility',
@@ -78,6 +77,7 @@ export function ServicesSection() {
       details:
         'We continuously verify eligibility, surface deductible/coverage insights, and flag exceptions for human review. Reduce friction while improving collection confidence.',
       video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      icon: Shield,
     },
     {
       title: 'Recall + Reactivation',
@@ -85,6 +85,7 @@ export function ServicesSection() {
       details:
         'Segmented campaigns across SMS and email with intelligent send windows. Clear reporting pinpoints ROI by provider, procedure, and cohort.',
       video: 'https://www.youtube.com/embed/ysz5S6PUM-U',
+      icon: RefreshCw,
     },
     {
       title: 'Front Desk Copilot',
@@ -92,6 +93,7 @@ export function ServicesSection() {
       details:
         'Live guidance for insurance questions, billing, and scripting—consistent service quality without added headcount. Fully auditable with role-based access.',
       video: 'https://www.youtube.com/embed/oHg5SJYRHA0',
+      icon: Headphones,
     },
   ];
 
@@ -100,23 +102,35 @@ export function ServicesSection() {
       <div className="mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
         <SectionTitle>Services</SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {services.map((s, i) => (
-            <div
-              key={i}
-              className="border border-black/10 rounded-lg p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 bg-white"
-            >
-              <div className="space-y-2">
-                <h3 className="text-lg md:text-xl font-medium tracking-tight">{s.title}</h3>
-                <p className="text-black/80 text-sm md:text-base">{s.summary}</p>
-                <button
-                  onClick={() => setOpen(s)}
-                  className="mt-3 inline-block px-4 py-2 border border-black rounded-md text-sm hover:opacity-70 transition-opacity"
-                >
-                  Read More
-                </button>
+          {services.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={i}
+                className="group border border-black/10 rounded-xl p-6 md:p-7 shadow-sm bg-white transition-all hover:shadow-md hover:-translate-y-0.5"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0">
+                    <div className="h-10 w-10 rounded-full border border-black/10 flex items-center justify-center">
+                      <Icon className="h-5 w-5 text-black" strokeWidth={1.75} />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg md:text-xl font-semibold tracking-tight">{s.title}</h3>
+                    <p className="mt-1 text-sm md:text-base text-black/80 leading-relaxed">
+                      {s.summary}
+                    </p>
+                    <button
+                      onClick={() => setOpen(s)}
+                      className="mt-4 inline-block px-4 py-2 border border-black rounded-md text-sm hover:opacity-70 transition-opacity"
+                    >
+                      Read More
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <Modal
           open={!!open}
