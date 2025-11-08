@@ -1,28 +1,43 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Dashboard from './components/Dashboard';
+import { AboutSection, ServicesSection, CaseStudiesSection, TestimonialsSection, FAQSection } from './components/Sections';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [route, setRoute] = useState('home');
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#/', '') || 'home';
+      setRoute(hash);
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  if (route === 'dashboard') {
+    return (
+      <div className="bg-white text-black min-h-screen">
+        <Navbar />
+        <Dashboard />
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="bg-white text-black min-h-screen">
+      <Navbar />
+      <main>
+        <Hero />
+        <AboutSection />
+        <ServicesSection />
+        <CaseStudiesSection />
+        <TestimonialsSection />
+        <FAQSection />
+      </main>
+      <footer className="py-10 text-center text-sm text-black/60">© {new Date().getFullYear()} Velodent</footer>
     </div>
-  )
+  );
 }
-
-export default App
